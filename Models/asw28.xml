@@ -156,7 +156,7 @@
  <animation>
      <type>translate</type>
      <object-name>wheelM</object-name>
-     <property>/gear/gear/position-norm</property>
+     <property>gear/gear/position-norm</property>
    <interpolation>
      <entry>
        <ind>1.0</ind>
@@ -176,7 +176,7 @@
  <animation>
      <type>rotate</type>
      <object-name>geardoorL</object-name>
-     <property>/gear/gear/position-norm</property>
+     <property>gear/gear/position-norm</property>
    <interpolation>
      <entry>
        <ind>1.0</ind>
@@ -203,7 +203,7 @@
  <animation>
      <type>rotate</type>
      <object-name>geardoorR</object-name>
-     <property>/gear/gear/position-norm</property>
+     <property>gear/gear/position-norm</property>
    <interpolation>
      <entry>
        <ind>1.0</ind>
@@ -230,14 +230,14 @@
  <animation>
      <type>translate</type>
      <object-name>wheelM</object-name>
-     <property>/gear/gear[1]/compression-norm</property>
+     <property>gear/gear[1]/compression-norm</property>
      <factor>0.1</factor>
      <axis><z>1</z></axis>
  </animation>
  <animation>
      <type>spin</type>
      <object-name>wheelM</object-name>
-     <property>/gear/gear[1]/rollspeed-ms</property>
+     <property>gear/gear[1]/rollspeed-ms</property>
     <factor>-50</factor>
     <center>
             <x-m>-1.30486</x-m>
@@ -248,7 +248,7 @@
  <animation>
      <type>translate</type>
      <object-name>wheelR</object-name>
-     <property>/gear/gear[2]/compression-norm</property>
+     <property>gear/gear[2]/compression-norm</property>
      <factor>0.1</factor>
      <axis><z>1</z></axis>
  </animation>
@@ -327,7 +327,7 @@
 
 
   <effect>
-    <inherits-from>Models/Effects/model</inherits-from>
+    <inherits-from>Effects/model</inherits-from>
     <object-name>body</object-name>
      <object-name>canopyframe</object-name>
     <object-name>hstab</object-name>
