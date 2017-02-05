@@ -255,7 +255,7 @@
  
   <model>
       <name>Vario1</name>
-	 <path>Aircraft/Instruments-3d/glider/vario/ilec-sc7/ilec-sc7.xml</path>
+	 <path>instruments/ilec-sc7/ilec-sc7.xml</path>
 	 <offsets>
 		 <x-m>-2.36697</x-m>
 		 <y-m>0.0</y-m>
@@ -275,7 +275,7 @@
  
   <model>
       <name>ASI</name>
-	 <path>instruments/winter-asi-dg101/80mm_asi_6fms4.xml</path>
+	 <path>instruments/winter-asi-ask21-kph/80mm_asi_6fms4.xml</path>
 	 <offsets>
 		 <x-m>-2.36697</x-m>
 		 <y-m>-0.09338</y-m>
