@@ -113,47 +113,40 @@ copyright 2010 Patrice Poly; 2016 D-ECHO
     </help>
 
     <menubar>
-    <default>
-        <menu n="10">
-        <label>ASW28</label>
-        <enabled type="bool">true</enabled>     
-        <item>
-        <label>Aerotow Settings</label>
-        <binding>
-            <command>nasal</command>
-            <script>asw28.aerotow_dialog.open()</script>
-        </binding>
-        </item>    
-        <item>
-        <label>Winch Settings</label>
-        <binding>
-            <command>nasal</command>
-            <script>asw28.winch_dialog.open()</script>
-        </binding>
-        </item>  
-        <item>
-        <label>Toggle ground handling</label>
-        <binding>
-            <command>property-toggle</command>
-            <property>/controls/ground-handling</property>
-        </binding>
-        </item>    
-        <item>
-        <label>Toggle assiting gears</label>
-        <binding>
-            <command>property-toggle</command>
-            <property>/controls/gear/assist-1</property>
-        </binding>
-        </item>   
-            <item>
-                <label>Select Livery</label>
-                <binding>
-                <command>nasal</command>
-                <script>aircraft.livery.dialog.open()</script>
-                </binding>
-            </item>
-        </menu>
-    </default>
+        <default>
+            <menu n="10">
+                <label>ASW28</label>
+                <enabled type="bool">true</enabled>     
+                <item>
+                    <label>Aerotow Settings</label>
+                    <binding>
+                        <command>nasal</command>
+                        <script>asw28.aerotow_dialog.open()</script>
+                    </binding>
+                </item>    
+                <item>
+                    <label>Winch Settings</label>
+                    <binding>
+                        <command>nasal</command>
+                        <script>asw28.winch_dialog.open()</script>
+                    </binding>
+                </item>  
+                <item>
+                    <label>Ground services</label>
+                    <binding>
+                        <command>nasal</command>
+                        <script>asw28.groundservice_dialog.open()</script>
+                    </binding>
+                </item>   
+                <item>
+                    <label>Select Livery</label>
+                    <binding>
+                    <command>nasal</command>
+                    <script>aircraft.livery.dialog.open()</script>
+                    </binding>
+                </item>
+            </menu>
+        </default>
     </menubar>
 
     <!-- hide the 2D panel -->
@@ -418,86 +411,100 @@ copyright 2010 Patrice Poly; 2016 D-ECHO
                     </key>
                     <key n="23">
                         <name>Ctrl-w</name>
-                        <desc>Place Winch and hook in</desc>
+                        <desc>Place winch in front of aircraft</desc>
                         <binding>
-                        <command>nasal</command>
-                        <script>towing.setWinchPositionAuto()</script>
+                            <command>nasal</command>
+                            <script>towing.setWinchPositionAuto()</script>
                         </binding>
                     </key>
                     <key n="87">
-                            <name>W</name>
-                            <desc>Toggle winch hook</desc>
-                            <binding>
-                                    <command>nasal</command>
-                                    <script>
-                                            var p = "/sim/hitches/winch/open";
-                                            setprop(p, !getprop(p));
-                                    </script>
-                            </binding>
+                        <name>W</name>
+                        <desc>Increase winch speed</desc>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                throttle = getprop("/sim/hitches/winch/winch/rel-speed") + 0.05;
+                                if (throttle > 1) throttle = 1;
+                                setprop("/sim/hitches/winch/winch/rel-speed", throttle);
+                                speed = throttle * getprop("/sim/hitches/winch/winch/max-speed-m-s");
+                                force = getprop("/sim/hitches/winch/force");
+                                gui.popupTip(sprintf("Winch throttle %d%%, speed %0.2f m/s, force %0.2f", throttle * 100, speed, force));
+                            </script>
+                        </binding>
                     </key>
                     <key n="119">
-                            <name>w</name>
-                            <desc>Increase winch speed</desc>
-                            <binding>
-                                    <command>nasal</command>
-                                    <script>interpolate("/sim/hitches/winch/winch/rel-speed", 1.0, 2)</script>
-                            </binding>
-                            <mod-up>
-                                    <binding>
-                                            <command>nasal</command>
-                                            <script>interpolate("/sim/hitches/winch/winch/rel-speed", 0.0, 2)</script>
-                                    </binding>
-                            </mod-up>
+                        <name>w</name>
+                        <desc>Decrease winch speed</desc>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                throttle = getprop("/sim/hitches/winch/winch/rel-speed") - 0.05;
+                                if (0 > throttle) throttle = 0;
+                                setprop("/sim/hitches/winch/winch/rel-speed", throttle);
+                                speed = throttle * getprop("/sim/hitches/winch/winch/max-speed-m-s");
+                                force = getprop("/sim/hitches/winch/force");
+                                gui.popupTip(sprintf("Winch throttle %d%%, speed %0.2f m/s, force %0.2f", throttle * 100, speed, force));
+                            </script>
+                        </binding>
                     </key>
                     <key n="15">
-                            <name>Ctrl-o</name>
-                            <desc>Find aircraft for aerotow</desc>
+                        <name>Ctrl-o</name>
+                        <desc>Find aircraft for aerotow</desc>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/controls/aerotow/find-aircraft</property>
+                            <value type="bool">true</value>
+                        </binding>
+                        <mod-up>
                             <binding>
-                                    <command>property-assign</command>
-                                    <property>/controls/aerotow/find-aircraft</property>
-                                    <value type="bool">true</value>
+                                <command>property-assign</command>
+                                <property>/controls/aerotow/find-aircraft</property>
+                                <value type="bool">false</value>
                             </binding>
-                            <mod-up>
-                                    <binding>
-                                            <command>property-assign</command>
-                                            <property>/controls/aerotow/find-aircraft</property>
-                                            <value type="bool">false</value>
-                                    </binding>
-                            </mod-up>
+                        </mod-up>
                     </key>
                     <key n="111">
-                            <name>o</name>
-                            <desc>Lock aerotow hook</desc>
+                        <name>o</name>
+                        <desc>Open hook</desc>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/sim/hitches/hook-open</property>
+                            <value type="bool">true</value>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/sim/hitches/aerotow/open</property>
+                            <value type="bool">true</value>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/sim/hitches/winch/open</property>
+                            <value type="bool">true</value>
+                        </binding>
+                        <mod-up>
                             <binding>
-                                    <command>property-assign</command>
-                                    <property>/sim/hitches/aerotow/open</property>
-                                    <value type="bool">false</value>
+                                <command>property-assign</command>
+                                <property>/sim/hitches/hook-open</property>
+                                <value type="bool">false</value>
                             </binding>
-                    </key>
-                    <key n="79">
-                            <name>O</name>
-                            <desc>Open aerotow hook</desc>
-                            <binding>
-                                    <command>property-assign</command>
-                                    <property>/sim/hitches/aerotow/open</property>
-                                    <value type="bool">true</value>
-                            </binding>
+                        </mod-up>
+
                     </key>
             </keyboard>
     </input>
 
     <nasal>
         <doors>
-        <file>Nasal/doors.nas</file>
+            <file>Nasal/doors.nas</file>
         </doors>
         <asw28>
-                <file>Aircraft/Instruments-3d/glider/vario/ilec-sc7/ilec-sc7.nas</file>
-                <file>Nasal/wool-thread.nas</file>
-                <file>Nasal/AR3201.nas</file>
-                <file>Nasal/dialogs.nas</file>
-                <file>Nasal/ground-handling.nas</file>
-                <file>Nasal/liveries.nas</file>
-            </asw28>
+            <file>Aircraft/Instruments-3d/glider/vario/ilec-sc7/ilec-sc7.nas</file>
+            <file>Nasal/wool-thread.nas</file>
+            <file>Nasal/AR3201.nas</file>
+            <file>Nasal/dialogs.nas</file>
+            <file>Nasal/groundhandling.nas</file>
+            <file>Nasal/liveries.nas</file>
+        </asw28>
     </nasal>
   
 </PropertyList>
