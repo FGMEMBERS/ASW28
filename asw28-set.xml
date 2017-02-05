@@ -26,8 +26,7 @@ copyright 2010 Patrice Poly; 2016 D-ECHO
 
 
     <model>
-    <path archive="y">Models/asw28.xml</path>
-
+    <path archive="y">Aircraft/ASW28/Models/asw28.xml</path>
         <livery>
             <file type="string"></file>
         </livery>
