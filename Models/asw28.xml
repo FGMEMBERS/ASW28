@@ -624,14 +624,16 @@
   
  	<animation>
 		<type>rotate</type>
-		<object-name>yoke</object-name>
+		<object-name>stick</object-name>
+		<object-name>stick-switch</object-name>
+        <object-name>ptt-front</object-name>
 		<property>controls/flight/elevator</property>
 		<min-deg>-20</min-deg>
 		<max-deg>20</max-deg>
 		<factor>20</factor>
 		<center>
-			<x-m>-2.19743</x-m>
-			<z-m>-0.2021</z-m>
+			<x-m>-2.1772</x-m>
+			<z-m>-0.3141</z-m>
 		</center>
 		<axis>
 			<x>0</x>
@@ -643,14 +645,16 @@
 
  	<animation>
 		<type>rotate</type>
-		<object-name>yoke</object-name>
+		<object-name>stick</object-name>
+		<object-name>stick-switch</object-name>
+        <object-name>ptt-front</object-name>
 		<property>controls/flight/aileron</property>
 		<min-deg>-25</min-deg>
 		<max-deg>25</max-deg>
 		<factor>-25</factor>
 		<center>
-			<x-m>-2.19743</x-m>
-			<z-m>-0.2021</z-m>
+			<x-m>-2.1772</x-m>
+			<z-m>-0.3141</z-m>
 		</center>
 		<axis>
 			<x>1</x>
@@ -658,129 +662,186 @@
 			<z>0</z>
 		</axis>
 	</animation>
+    <!--PushToTalk Front--> 
+    <animation>
+        <type>pick</type>
+        <object-name>ptt-front</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>/instrumentation/comm[0]/ptt</property>
+            </binding>
+            <mod-up>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/instrumentation/comm[0]/ptt</property>
+                </binding>
+            </mod-up>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>ptt-front</tooltip-id>
+                <label>Push to talk: %s</label>
+                <mapping>on-off</mapping>
+                <property>/instrumentation/comm[0]/ptt</property>
+            </binding>
+        </hovered>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>ptt-front</object-name>
+        <property>/instrumentation/comm[0]/ptt</property>
+        <factor>-0.002</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
         <!--Spoiler Handle-->
-  <animation>
-    <type>slider</type>
-		<object-name>spoiler.handle</object-name>
-    <visible>true</visible>
-    <drag-direction>vertical</drag-direction>
-    <action>
-      <button>0</button>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>property-adjust</command>
-		<property>controls/engines/engine/throttle</property>
-    <factor>0.025</factor>
-    <min>0</min>
-    <max>1</max>
-      </binding>
-    </action>
-  </animation>
+        <animation>
+            <type>slider</type>
+            <object-name>airbrake-lever</object-name>
+            <visible>true</visible>
+            <drag-direction>horizontal</drag-direction>
+            <action>
+                <button>0</button>
+                <repeatable>false</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>/controls/engines/engine/throttle</property>
+                    <factor>0.025</factor>
+                    <min>0</min>
+                    <max>1</max>
+                </binding>
+            </action>
+            <hovered>
+                <binding>
+                    <command>set-tooltip</command>
+                    <tooltip-id>airbrake</tooltip-id>
+                    <label>%s</label>
+                    <mapping>nasal</mapping>
+                    <property>/controls/engines/engine/throttle</property>
+                    <script>
+                        return sprintf("Speedbrake %d%% out", 100-arg[0]*100);
+                    </script>
+                </binding>
+            </hovered>
+        </animation>
  	 <animation>
-		<type>translate</type>
-		<object-name>spoiler.handle</object-name>
-		<property>controls/engines/engine/throttle</property>
-		<axis>
-			<x>1</x>
-			<y>0.0</y>
-			<z>0</z>
-		</axis>
-                <interpolation>
-                    <entry>
-                        <ind>1</ind>
-                        <dep>0</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.7</ind>
-                        <dep>0.15</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.0</ind>
-                        <dep>0.15</dep>
-                    </entry>
-      </interpolation>
+            <type>translate</type>
+            <object-name>airbrake-lever</object-name>
+            <property>controls/engines/engine/throttle</property>
+            <axis>
+                    <x>1</x>
+                    <y>0.0</y>
+                    <z>0.2</z>
+            </axis>
+            <interpolation>
+                <entry>
+                    <ind>1</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0.3</dep>
+                </entry>
+            </interpolation>
 	</animation>
- 	 <animation>
-		<type>translate</type>
-		<object-name>spoiler.handle</object-name>
-		<property>controls/engines/engine/throttle</property>
-		<axis>
-			<x>1</x>
-			<y>0.4</y>
-			<z>0</z>
-		</axis>
-                <interpolation>
-                    <entry>
-                        <ind>1</ind>
-                        <dep>0</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.65</ind>
-                        <dep>0.0</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.50</ind>
-                        <dep>0.025</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.0</ind>
-                        <dep>0.025</dep>
-                    </entry>
-      </interpolation>
-	</animation>
- 	 <animation>
-		<type>translate</type>
-		<object-name>spoiler.handle</object-name>
-		<property>controls/engines/engine/throttle</property>
-		<axis>
-			<x>1</x>
-			<y>0.0</y>
-			<z>0</z>
-		</axis>
-                <interpolation>
-                    <entry>
-                        <ind>1</ind>
-                        <dep>0</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.5</ind>
-                        <dep>0.0</dep>
-                    </entry>
-                    <entry>
-                        <ind>0.0</ind>
-                        <dep>0.12</dep>
-                    </entry>
-      </interpolation>
-	</animation>
-        <!--Elevator trim handle-->
-  <animation>
-    <type>slider</type>
-		<object-name>trim.handle</object-name>
-    <visible>true</visible>
-    <drag-direction>vertical</drag-direction>
-    <action>
-      <button>0</button>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>property-adjust</command>
-		<property>controls/flight/elevator-trim</property>
-    <factor>0.025</factor>
-    <min>-1</min>
-    <max>1</max>
-      </binding>
-    </action>
-  </animation>
- 	 <animation>
-		<type>translate</type>
-		<object-name>trim.handle</object-name>
-		<property>controls/flight/elevator-trim</property>
-		<axis>
-			<x>1</x>
-			<y>0.0</y>
-			<z>0</z>
-		</axis>
-                <factor>-0.035</factor>
-	</animation>
+    <!--Release Cable-->
+    <animation>
+        <type>pick</type>
+        <object-name>hook-lever</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/sim/hitches/hook-open</property>
+                    <value type="bool">true</value>
+                </binding>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/sim/hitches/aerotow/open</property>
+                    <value type="bool">true</value>
+                </binding>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/sim/hitches/winch/open</property>
+                    <value type="bool">true</value>
+                </binding>
+                <mod-up>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/sim/hitches/hook-open</property>
+                        <value type="bool">false</value>
+                    </binding>
+                </mod-up>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>hooks</tooltip-id>
+                <label>Hooks: %s</label>
+                <mapping>open-close</mapping>
+                <property>/sim/hitches/hook-open</property>
+            </binding>
+        </hovered>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>hook-lever</object-name>
+        <property>/sim/hitches/hook-open</property>
+        <factor>0.02</factor>
+        <axis>
+            <x>1</x>
+            <y>0.2</y>
+            <z>0</z>
+        </axis>
+    </animation>
+    <!--Trim Handle Front-->
+    <animation>
+        <type>slider</type>
+        <object-name>trim-lever</object-name>
+        <visible>true</visible>
+        <drag-direction>vertical</drag-direction>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                        <property>controls/flight/elevator-trim</property>
+            <factor>0.025</factor>
+            <min>-1</min>
+            <max>1</max>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <label>Elevator Trim: %3d%%</label>
+                <measure-text>Elevator Trim: 100%</measure-text>
+                <tooltip-id>trim-front</tooltip-id>
+                <mapping>percent</mapping>
+                <property>controls/flight/elevator-trim</property>
+            </binding>
+        </hovered>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>trim-lever</object-name>
+        <property>controls/flight/elevator-trim</property>
+        <axis>
+                <x>1</x>
+                <y>0.0</y>
+                <z>0.08</z>
+        </axis>
+        <factor>-0.065</factor>
+    </animation>
 	
 	
  <animation>
