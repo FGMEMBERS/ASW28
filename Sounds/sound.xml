@@ -8,7 +8,7 @@
   <tyre-rumble>
    <name>tyre-rumble</name>
    <mode>looped</mode>
-   <path>Aircraft/ASK13/Sounds/ground_roll2.wav</path>
+   <path>ground_roll2.wav</path>
    <condition>
     <or>
      <property>/gear/gear[0]/wow</property>
@@ -25,7 +25,7 @@
   <left-wing-tip>
    <name>left-wing-tip</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/left-wing-tip.wav</path>
+   <path>left-wing-tip.wav</path>
    <condition>
      <property>/gear/gear[4]/wow</property>
    </condition>
@@ -34,7 +34,7 @@
    <right-wing-tip>
    <name>right-wing-tip</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/right-wing-tip.wav</path>
+   <path>right-wing-tip.wav</path>
    <condition>
      <property>/gear/gear[3]/wow</property>
    </condition>
@@ -43,7 +43,7 @@
   <tail-tip>
    <name>tail-tip</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/wing-tip.wav</path>
+   <path>wing-tip.wav</path>
    <condition>
      <property>/gear/gear[2]/wow</property>
    </condition>
@@ -53,7 +53,7 @@
   <wind>
    <name>wind</name>
    <mode>looped</mode>
-   <path>Aircraft/ASK13/Sounds/wind-ask13.wav</path>
+   <path>wind-ask13.wav</path>
    <property>velocities/airspeed-kt</property>
    <volume>
     <property>position/altitude-ft</property>
@@ -68,6 +68,12 @@
      <min>0.03</min>
      <max>5</max>
    </volume>
+   <volume>
+     <property>sim/model/door-positions/frontwin/position-norm</property>
+     <factor>5</factor>
+     <min>0.5</min>
+     <max>5.5</max>
+   </volume>
    <pitch>
     <property>velocities/airspeed-kt</property>
     <factor>0.002</factor>
@@ -78,7 +84,7 @@
   <airbrakes>
    <name>airbrakes</name>
    <mode>looped</mode>
-   <path>Aircraft/ASK13/Sounds/airbrakes.wav</path>
+   <path>airbrakes.wav</path>
    <property>velocities/airspeed-kt</property>
    <volume>
     <property>/surface-positions/speedbrake-pos-norm</property>
@@ -104,7 +110,7 @@
   <airbrakes_lock>
    <name>airbrakes_lock</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/airbrakes-lock.wav</path>
+   <path>airbrakes-lock.wav</path>
    <condition>
     <equals>
       <property>surface-positions/speedbrake-pos-norm</property>
@@ -116,7 +122,7 @@
   <gear_lock>
    <name>gear_lock</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/airbrakes-lock.wav</path>
+   <path>airbrakes-lock.wav</path>
    <condition>
     <less-than>
       <property>gear/gear/position-norm</property>
@@ -149,7 +155,7 @@
 <variometer-up>
    <name>variometer-up</name>
    <mode>looped</mode>
-   <path>Aircraft/ASK13/Sounds/vario.wav</path>
+   <path>vario.wav</path>
    <condition>
    <and>
      <greater-than>
@@ -176,7 +182,7 @@
 <variometer-down>
    <name>variometer-down</name>
    <mode>looped</mode>
-   <path>Aircraft/ASK13/Sounds/vario2.wav</path>
+   <path>vario2.wav</path>
     <condition>
     <and>
      <equals>
@@ -209,7 +215,7 @@
   <winch_tow>
    <name>winch_tow</name>
    <mode>looped</mode>
-   <path>Aircraft/ASK13/Sounds/winch_tow.wav</path>
+   <path>winch_tow.wav</path>
    <condition>
     <not>
      <property>sim/hitches/winch/open</property>
@@ -227,7 +233,7 @@
   <creak-positive>
    <name>creak-positive</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/creak.wav</path>
+   <path>creak.wav</path>
    <condition>
     <greater-than>
      <property>accelerations/pilot-g</property>
@@ -244,7 +250,7 @@
   <whoosh-negative>
    <name>whoosh-negative</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/creak.wav</path>
+   <path>creak.wav</path>
    <condition>
     <less-than>
      <property>orientation/pitch-rate-degps</property>
@@ -261,7 +267,7 @@
   <cable_release>
    <name>cable_release</name>
    <mode>once</mode>
-   <path>Aircraft/ASK13/Sounds/winch_release.wav</path>
+   <path>winch_release.wav</path>
    <condition>
     <property>sim/hitches/winch/open</property>
    </condition>
