@@ -12,9 +12,9 @@ copyright 2010 Patrice Poly; 2016/17 D-ECHO
     <sim>
 
         <description>AS Alexander Schleicher ASW28</description>
-        <author>Patrice Poly, D-ECHO</author>
+        <author>D-ECHO based on ASK13 by Patrice Poly using winch system by Viktor Radnai</author>
         <status>early-production</status>
-        <aircraft-version>201701</aircraft-version>
+        <aircraft-version>201703</aircraft-version>
         
         
         <flight-model archive="y">yasim</flight-model>
@@ -30,6 +30,17 @@ copyright 2010 Patrice Poly; 2016/17 D-ECHO
             <livery>
                 <file type="string"></file>
             </livery>
+            <rendering>
+                <reflection-enabled type="int">1</reflection-enabled>
+                <reflection-type type="int">2</reflection-type>
+                <reflection-dynamic type="int">1</reflection-dynamic>
+                <reflection-correction type="float">0.1</reflection-correction>
+                <reflection-fresnel type="float">0.5</reflection-fresnel>
+                <reflection-fresnel-factor type="float">1.0</reflection-fresnel-factor>
+                <reflection-rainbow type="float">0.1</reflection-rainbow>
+                <reflection-noise type="float">0.05</reflection-noise>
+                <ambient-correction type="float">0.15</ambient-correction>
+            </rendering>
         </model>
 
         <sound>
